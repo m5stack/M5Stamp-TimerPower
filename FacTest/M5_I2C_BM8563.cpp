@@ -262,6 +262,10 @@ void I2C_BM8563::WakeAfterSeconds(int afterSeconds) {
     while (ReadReg(0x00) != 0) {
         WriteReg(0x00, 0);
     }
+    if (afterSeconds >= 255) {
+        int div = 60;
+        afterSeconds = (afterSeconds / div) * div;
+    }
     SetAlarmIRQ(afterSeconds);
     WakeChecksum(afterSeconds);
     while (ReadReg(0x01) != 0x01) {
