@@ -303,7 +303,7 @@ int I2C_BM8563::WakeChecksum(int afterSeconds) {
     get_value_0f_h = ReadReg(0x0F);
     while ((get_value_0e_h != rtc_reg_value_0e_h) ||
            (get_value_0f_h != rtc_reg_value_0f_h)) {
-        SetAlarmIRQ(afterSeconds);
+        SetAlarmIRQ(afterSeconds * div);
         get_value_0e_h = ReadReg(0x0E);
         get_value_0f_h = ReadReg(0x0F);
     }
